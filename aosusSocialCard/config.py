@@ -10,3 +10,5 @@ class config:
         "Alyamama-Regular.ttf": 400,
         "Alyamama-Light.ttf": 300,
     }
+
+    domainBase = 'discourse.aosus.org'

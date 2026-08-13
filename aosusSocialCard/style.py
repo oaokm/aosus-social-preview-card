@@ -17,7 +17,7 @@ class style:
         with open(file_path, "rb") as f:
             return base64.b64encode(f.read()).decode("utf-8")
 
-    def setCssFile(self):
+    def setCssFile(self, getStyle=False):
         if self.ok:
             baseCssFileParh = config.baseCss
             baseCssData     = None
@@ -29,16 +29,17 @@ class style:
                 baseCssData = file.read()
                 file.close()
 
+            if not getStyle:
+                with open(cssTempFilePath, 'w+', encoding='utf-8') as file:
+                    if file.writable():
+                        file.write(f"{self.fontFace}\n{baseCssData}")
+                        file.close()
+                        return True
+                    else:
+                        print(f'[style.setCssFile]: opss! can not write on `{cssTempFilePath}`')
+                        return False
             
-            with open(cssTempFilePath, 'w+', encoding='utf-8') as file:
-                if file.writable():
-                    file.write(f"{self.fontFace}\n{baseCssData}")
-                    file.close()
-                    return True
-                else:
-                    print(f'[style.setCssFile]: opss! can not write on `{cssTempFilePath}`')
-                    return False
-
+            return f"{self.fontFace}\n{baseCssData}"
 
 
     def _setFontFace(self, withStyleTag=False):

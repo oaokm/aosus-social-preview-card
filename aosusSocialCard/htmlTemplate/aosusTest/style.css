@@ -5,125 +5,203 @@
                     font-style: normal;
                     font-display: swap;
                 }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* linear-gradient(to top, rgba(100, 180, 255, 0.1), #000c18);  */
+body {
     width: 1280px;
     height: 640px;
-    background: #000c18;
+    background: #000c18; /* اللون الأساسي */
+    
+    background-image: linear-gradient(to top, #253341, #000c18);
+    background-size: 100% 100px; /* ارتفاع التدرج 60 بكسل فقط */
+    background-position: bottom; /* يبدأ من الأسفل */
+    background-repeat: no-repeat;
+
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Alyamama';
     font-weight: 400;
     padding: 20px;
-  }
-  .card {
+}
+
+.card {
+    position: relative;          /* ← المرجع للزخرفة */
     border: 1px solid #30363d;
+    
+    /*border: none;*/
     border-radius: 16px;
+    
     padding: 40px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* جعل المحتوى يتوزع عمودياً */
-  }
-
-  /* رأس البطاقة يحتوي على الشعار في اليمين */
-  .card-header {
-    display: flex;
-    justify-content: center;  /* يدفع كل المحتوى إلى المنتصف */
-    align-items: center;
-    margin-bottom: 20px;
-    flex-shrink: 0; /* منع الانكماش */
-  }
-  .card-header img {
-    height: 40px;  /* حجم مناسب */
-    width: auto;
-    /* يمكنك تعديل الفلتر حسب لون الشعار الفعلي */
-  }
-
-  .card-header {
-    display: flex;
-    justify-content: center;  /* يدفع كل المحتوى إلى المنتصف */
-    align-items: center;
-    gap: 20px;                 /* مسافة بين العناصر */
-    margin-bottom: 20px;
-    flex-shrink: 0;
+    /* overflow: hidden;  */    /* يمكن إزالتها أو الاحتفاظ بها بحذر */
 }
 
-    /* الشعار في أقصى اليمين (لأنه آخر عنصر) */
-    .card-header .logo {
-        height: 40px;
-        width: auto;
-        /* لا تستخدم filter هنا ليظهر بلونه الأصلي */
-        }
+/* رأس البطاقة */
+.card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    /* الفاصل العمودي */
-    .divider {
-    width: 1px;
+    gap: 30px;
+    margin-bottom: 30px;
+
+    flex-shrink: 0;
+
+    transform: translateY(30px);   /* ← أضف هذا السطر لرفع المحتوى للأعلى */
+}
+
+.card-header .logo {
+    height: 56px;
+    width: auto;
+
+    gap: 16px;
+}
+
+.divider {
+    width: 2px;
     height: 40px;
     background-color: #30363d;
     flex-shrink: 0;
-    }
+}
 
-    /* معلومات المستخدم (الصورة + النص) */
-    .user-info {
+.user-info {
     display: flex;
     align-items: center;
     gap: 12px;
-    }
+}
 
-    .user-info .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;      /* حواف ناعمة (ليست دائرية) */
+.user-info .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
     object-fit: cover;
     border: 2px solid #30363d;
-    }
+}
 
-    .user-info .username {
+.user-info .username {
     color: #f0f6fc;
-    font-size: 18px;
+    font-size: 24px; 
     font-weight: 500;
-    font-family: 'Alyamama', Arial, sans-serif;
+    font-family: 'Alyamama';
     white-space: nowrap;
-    }
-
+}
 
   /* المحتوى المركزي */
   .card-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;        /* لضمان ظهور النص فوق الزخرفة */
+      z-index: 1;               /* يرفع النص فوق الزخرفة */
+      transform: translateY(35px);   /* ← أضف هذا السطر لرفع المحتوى للأعلى */
   }
 
   h1 {
-    color: #3da451;
-    font-size: 48px;
-    margin-bottom: 16px;
-  }
-  p {
-    color: #FFF;
-    font-size: 24px;
-    margin-bottom: 24px;
-    direction: rtl
+      color: #1d8337;
+      font-size: 48px;
+      
+      max-width: 1200px;        /* تحديد العرض الأقصى للفقرة */
+      margin-left: auto;       /* توسيط الكتلة أفقياً */
+      margin-right: auto;      /* توسيط الكتلة أفقياً */
+
+      margin-bottom: 32px;
+      
+      direction: rtl;
+
+      
   }
 
-   .badge {
+  p {
+      color: #FFF;
+      font-size: 24px;
+      margin-bottom: 24px;
+      
+      max-width: 1050px;        /* تحديد العرض الأقصى للفقرة */
+      margin-left: auto;       /* توسيط الكتلة أفقياً */
+      margin-right: auto;      /* توسيط الكتلة أفقياً */
+      
+      direction: rtl;
+  }
+
+.badge {
     display: inline-block;
-    background-color: #ff6060;   /* خلفية رمادية داكنة */
-    color: #FFF;             /* لون النص فاتح */
-    padding: 4px 12px;          /* حشوة داخلية صغيرة */
-    border-radius: 20px;        /* حواف ناعمة جداً (أو استخدم 8px للزوايا البسيطة) */
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Alyamama';
+    background-color: #ff6060;
+    color: #FFF;
+    padding: 4px 12px;
+    border-radius: 40px;
+    
+    font-size: 18px;
     font-weight: 700;
+    font-family: 'Alyamama';
+    
     white-space: nowrap;
-    border: 1px solid #374151;  /* حد خفيف */
-    /* يمكنك تغيير الألوان حسب ذوقك */
+    border: 1px solid #374151;
 }
 
+/* ===== الزخرفة (الصورة الشفافة) ===== */
+.decoration-image {
+    position: absolute;
+    right: -180px;                 /* تلتصق بالحافة اليمنى للبطاقة */
+    top: 50%;
+    transform: translateY(-50%);  /* توسيط عمودي */
+    width: 560px;             /* حجم الزخرفة (عدّله حسب رغبتك) */
+    height: auto;
+    z-index: 0;               /* خلف المحتوى */
+    pointer-events: none;     /* تمنع التفاعل معها */
+    opacity: 0.8;             /* يمكنك تخفيف الشفافية إن أردت */
+}
+
+
+/* ===== التذييل ===== */
+.card-footer {
+    flex-shrink: 0;                /* يمنع الانكماش */
+    text-align: center;
+    padding-top: 20px;             /* مسافة عن المحتوى أعلاه */
+    /* border-top: 1px solid #30363d; خط فاصل أنيق (اختياري) */
+    margin-top: 30px;              /* مسافة إضافية */
+}
+
+.footer-text {
+    color: #1d8337;                /* لون رمادي فاتح */
+    font-size: 40px;
+    font-weight: 500;
+    font-family: 'Alyamama';
+    letter-spacing: 2px;           /* تباعد بين الحروف */
+    margin-bottom: 4px;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: 'Alyamama', sans-serif;
+    direction: ltr;
+    letter-spacing: 1px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.footer-link::before,
+.footer-link::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #a79b9b, transparent);
+    /* تدرج لطيف بدلاً من خط صلب */
+}
