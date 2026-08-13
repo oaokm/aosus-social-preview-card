@@ -1,7 +1,7 @@
 from config import config
 from style import style
 import os, base64
-
+from aosus_extracter import aosusExtracter
 from utils import (
     getUserProfileImageUrlPath
 )
@@ -71,14 +71,9 @@ class htmlBody:
             
 
 if __name__ == '__main__':
-    username = 'islamux'
-    print(htmlBody(htmlTemplate='aosusTest', data={
-        'username': username, 
-        'profileImageUrlPath': getUserProfileImageUrlPath(username),
-        'title': "تطبيق ويب من سيربح المليون مبني على كتاب بصائر لمكافحة الإلحاد",
-        'text': "السلام عليكم ورحمة الله وبركاته برمجت تطبيق ويب من سيربح المليون مصدرة هو كتاب الدكتور هيثم طلعت بصائر والذي قال عنه انه مشروع العمر لمكافحة الافكار الالحادية المنتشرة",
-        'tag': " | ".join(['برمجة' , 'المشاريع', "البرمجة"])
-        }).setHTML())
+    url = 'https://discourse.aosus.org/t/topic/5231'
+
+    print(htmlBody(htmlTemplate='aosusTest', data=aosusExtracter(url)._extractArtcleData()).setHTML())
 
 
 
