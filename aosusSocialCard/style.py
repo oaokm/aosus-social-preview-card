@@ -1,7 +1,7 @@
 from config import config
+from io import BytesIO
 import base64
 import os
-
 
 class style:
     def __init__(self, htmlTemplate:str, _withStyleTag=False):
@@ -17,29 +17,46 @@ class style:
         with open(file_path, "rb") as f:
             return base64.b64encode(f.read()).decode("utf-8")
 
-    def setCssFile(self, getStyle=False):
+
+    def setCssFile(self, getStyle=False, justGetStyle=False, badgesColor='#1d8337'):
         if self.ok:
             baseCssFileParh = config.baseCss
             baseCssData     = None
             cssTempFilePath = os.path.join(self.htmlTemplatePath, 'style.css')
             cssTempData     = None
     
+            badgeSet =  f"""
+                display: inline-block;
+                background-color: {badgesColor};
+                color: #FFF;
+                padding: 4px 12px;
+                border-radius: 40px;
+                
+                font-size: 18px;
+                font-weight: 700;
+                font-family: 'Alyamama';
+                
+                white-space: nowrap;
+                border: 1px solid #374151;
+                """
 
             with open(baseCssFileParh, 'r', encoding='utf-8') as file:
-                baseCssData = file.read()
+                baseCssData = file.read() + f'.badge{{ {badgeSet} }}'
                 file.close()
 
             if not getStyle:
                 with open(cssTempFilePath, 'w+', encoding='utf-8') as file:
                     if file.writable():
-                        file.write(f"{self.fontFace}\n{baseCssData}")
+                        file.write(f"{self.fontFace}\n{baseCssData}\n.badge{{ {badgeSet} }}")
                         file.close()
+                        if justGetStyle:
+                            return baseCssData.encode('utf-8')
                         return True
                     else:
                         print(f'[style.setCssFile]: opss! can not write on `{cssTempFilePath}`')
                         return False
             
-            return f"{self.fontFace}\n{baseCssData}"
+            return BytesIO(f"{self.fontFace}\n{baseCssData}".encode('utf-8'))
 
 
     def _setFontFace(self, withStyleTag=False):
@@ -62,7 +79,7 @@ class style:
                     font-display: swap;
                 }}"""
         if withStyleTag:
-            return f"""<style>{fontFace}</style>"""
+            return f"""<style>\n\t{fontFace}\n</style>"""
         
         return fontFace
 

@@ -11,6 +11,14 @@ class htmlBody:
         self.ok   = True
         self.htmlTemplate = htmlTemplate
         self.data = data
+        self.tag = self.data.get('tag')
+        if self.tag:
+            color = self.tag.split(' | ')[0]
+            print(color)
+            self.tagsColor = config.tagsColors.get(color, '#1d8337')
+            print(self.tagsColor)
+        else:
+            self.tagsColor = '#1d8337'
 
         self.htmlTemplatePath = os.path.join('htmlTemplate', self.htmlTemplate)
         if not os.path.exists(self.htmlTemplatePath):
@@ -54,8 +62,9 @@ class htmlBody:
     
     def setHTML(self):
         # ./{os.path.join(self.htmlTemplatePath, 'style.css')}
-        htmlHead     = f"""<head> <link rel="stylesheet" href="/home/superoaokm/Codes/aosus-social-preview-card/aosusSocialCard/htmlTemplate/aosusTest/style.css"> </head>"""
-        #htmlHead     = f"""<head> \n<style> \n{style(htmlTemplate=self.htmlTemplate).setCssFile(getStyle=True)} \n</style>\n</head>"""
+        s = style(htmlTemplate=self.htmlTemplate)
+        htmlHead     = f"""<head>\n\t<meta charset="UTF-8">\n\t{s._setFontFace(withStyleTag=True)} \n\t<link rel="stylesheet" href="data:text/css;base64,{base64.b64encode(s.setCssFile(justGetStyle=True, badgesColor=self.tagsColor)).decode('utf-8')}"> \n</head>"""
+        # htmlHead     = f"""<head> \n<style> \n{style(htmlTemplate=self.htmlTemplate).setCssFile(getStyle=True).read()} \n</style>\n</head>"""
         htmlBody     = f"""<body>{self._setCard()}</body>"""
         htmlFullBody = f"""<!DOCTYPE html>\n<html lang="ar">\n{htmlHead}\n{htmlBody}</html>"""
 
@@ -71,7 +80,7 @@ class htmlBody:
             
 
 if __name__ == '__main__':
-    url = 'https://discourse.aosus.org/t/topic/5231'
+    url = 'https://discourse.aosus.org/t/topic/5440/2'
 
     print(htmlBody(htmlTemplate='aosusTest', data=aosusExtracter(url)._extractArtcleData()).setHTML())
 

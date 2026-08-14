@@ -128,20 +128,6 @@ body {
       direction: rtl;
   }
 
-.badge {
-    display: inline-block;
-    background-color: #ff6060;
-    color: #FFF;
-    padding: 4px 12px;
-    border-radius: 40px;
-    
-    font-size: 18px;
-    font-weight: 700;
-    font-family: 'Alyamama';
-    
-    white-space: nowrap;
-    border: 1px solid #374151;
-}
 
 /* ===== الزخرفة (الصورة الشفافة) ===== */
 .decoration-image {
