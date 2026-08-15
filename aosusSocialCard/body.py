@@ -86,7 +86,7 @@ class htmlBody:
             
 
 if __name__ == '__main__':
-    url = 'https://discourse.aosus.org/t/topic/5476'
+    url = 'https://discourse.aosus.org/t/topic/3229'
 
     print(htmlBody(htmlTemplate='aosusTest', data=aosusExtracter(url)._extractArtcleData()).setHTML())
 
