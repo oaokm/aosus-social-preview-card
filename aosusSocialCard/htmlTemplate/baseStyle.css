@@ -11,7 +11,7 @@ body {
     background: #000c18; /* اللون الأساسي */
     
     background-image: linear-gradient(to top, #253341, #000c18);
-    background-size: 100% 100px; /* ارتفاع التدرج 60 بكسل فقط */
+    background-size: 100% 50px; /* ارتفاع التدرج 60 بكسل فقط */
     background-position: bottom; /* يبدأ من الأسفل */
     background-repeat: no-repeat;
 
@@ -27,7 +27,7 @@ body {
     position: relative;          /* ← المرجع للزخرفة */
     border: 1px solid #30363d;
     
-    /*border: none;*/
+    border: none;
     border-radius: 16px;
     
     padding: 40px;
@@ -132,16 +132,43 @@ body {
 /* ===== الزخرفة (الصورة الشفافة) ===== */
 .decoration-image {
     position: absolute;
-    right: -180px;                 /* تلتصق بالحافة اليمنى للبطاقة */
+    right: -235px;                 /* تلتصق بالحافة اليمنى للبطاقة */
     top: 50%;
     transform: translateY(-50%);  /* توسيط عمودي */
     width: 560px;             /* حجم الزخرفة (عدّله حسب رغبتك) */
     height: auto;
     z-index: 0;               /* خلف المحتوى */
     pointer-events: none;     /* تمنع التفاعل معها */
-    opacity: 0.8;             /* يمكنك تخفيف الشفافية إن أردت */
+    opacity: 0.6;             /* يمكنك تخفيف الشفافية إن أردت */
 }
 
+
+/* ===== الزخرفة - الجانب الأيسر ===== */
+.decoration-image-left {
+    position: absolute;
+    left: -10px;                /* ← غيّرها من -235 إلى -20 (أو 0 أو 10px) */
+    top: 50%;
+    transform: translateY(-55%);
+    width: auto;                /* العرض يتغير تلقائياً */
+    height: 550px;              /* الحجم الطبيعي 100% (أو 400px لو تحب) */
+    z-index: 0;
+    pointer-events: none;
+    opacity: 1;
+}
+
+/* ===== الزخرفة - الجانب الأعلى ===== */
+.decoration-image-top {
+    position: absolute;
+    top: 2px;                     /* تبدأ من أعلى البطاقة مباشرة */
+    left: 43%;                   /* ← غيّرها من 50% إلى 40% (أو 35% حسب رغبتك) */
+    transform: translateX(-43%); 
+    width: 1061px;                 /* العرض الأصلي للصورة */
+    height: 1px;                 /* تحكم بارتفاع الشريط (جرب 40~100) */
+    z-index: 0;
+    pointer-events: none;
+    opacity: 1;                 /* خففها قليلاً عشان تكون زخرفة خلفية */
+    object-fit: cover;            /* تضبط الصورة داخل المساحة */
+}
 
 /* ===== التذييل ===== */
 .card-footer {
@@ -159,6 +186,8 @@ body {
     font-family: 'Alyamama';
     letter-spacing: 2px;           /* تباعد بين الحروف */
     margin-bottom: 4px;
+
+    direction: rtl;
 }
 
 .footer-link {

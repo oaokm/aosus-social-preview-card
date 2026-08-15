@@ -55,6 +55,12 @@ class htmlBody:
         
         <!-- صورة الزخرفة (توضع هنا كآخر عنصر) -->
         <img src="./images/x.png" class="decoration-image">
+
+        <!-- صورة الزخرفة (توضع هنا كآخر عنصر) -->
+        <img src="./images/left-side.png" class="decoration-image-left">
+
+        <!-- صورة الزخرفة (توضع هنا كآخر عنصر) -->
+        <img src="./images/top-side.png" class="decoration-image-top">
         """
 
         cardBase   = f"""<div class="card">\n{cardHeader}\n{cardBody}\n{cardFooter}</div>"""
@@ -80,7 +86,7 @@ class htmlBody:
             
 
 if __name__ == '__main__':
-    url = 'https://discourse.aosus.org/t/topic/5440/2'
+    url = 'https://discourse.aosus.org/t/topic/5476'
 
     print(htmlBody(htmlTemplate='aosusTest', data=aosusExtracter(url)._extractArtcleData()).setHTML())
 
