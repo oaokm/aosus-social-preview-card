@@ -63,6 +63,3 @@ async def get_file(url: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=config.tcpPort)
-
-# http://0.0.0.0:8000/file/Mr_Robot[00001Kgjfu]/seasons/S1/E1/output.mp4
-# http://0.0.0.0:8000/file/Mr_Robot[00001Kgjfu]/seasons/S1/E2/output.mp4

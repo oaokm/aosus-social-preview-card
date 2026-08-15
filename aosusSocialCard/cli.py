@@ -42,10 +42,10 @@ if args.generate:
     id = extractArticleID(args.generate)
     cardPath = os.path.join(config.aosus_social_preview_card_dir_path, id+'.png')
     if not os.path.exists(cardPath):
-        htmlBody(htmlTemplate='aosusTest', data=aosusExtracter(args.generate)._extractArtcleData()).setHTML()
+        htmlBody(data=aosusExtracter(args.generate)._extractArtcleData()).setHTML()
         try:
             html_to_image(
-                html_path='./htmlTemplate/aosusTest/test.html',
+                html_path='./htmlTemplate/test.html',
                 output_path=cardPath
                 )
         except AttributeError:

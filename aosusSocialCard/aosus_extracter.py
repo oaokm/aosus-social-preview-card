@@ -5,6 +5,18 @@ from utils import (
 )
 
 class aosusExtracter:
+    """
+    aosusExtracter: the object that responsible to deal with aosus discourse website to extract basic info about articles
+
+    args:
+        - url(str): aosus article's link
+
+    variables:
+        - ok(bool): if it is "True", this means that nothing is hindering the object's operation.
+        - session(HTMLSession): reqeusts session
+        - webpage(HTMLSession): establishing a connection via `session` with method `GET` to aosus discourse website
+    """
+
     def __init__(self, url):
         self.ok  = True
         self.url = url
@@ -16,7 +28,6 @@ class aosusExtracter:
         if self.webpage.ok:
             pass
 
-        
         else:
             self.ok = False
 
@@ -28,6 +39,16 @@ class aosusExtracter:
             titleLimit=115,
             paragraphsLimit=3
             ):
+        """
+        _extractArtcleData: the object that responsible to deal with aosus discourse website to extract basic info about articles
+
+        args:
+            - contentLenght(int): an integer value represents the length of the content displayed in the generated card. default is 400 characters 
+            - tagsLimit(int): the number of tags displayed on the generated card is determined so that it does not exceed the specified dimensions. default is 3 tags
+            - titleLimit(int): an integer value represents the length of the title displayed in the generated card. default is 115 characters
+            - paragraphsLimit(int): represents only the number of text paragraphs that will be displayed. default is 3 paragraphs
+
+        """
         if self.ok:
             _title    = self.webpage.html.find('h1', first=True).text
             if len(_title) > titleLimit:

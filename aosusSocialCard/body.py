@@ -1,33 +1,38 @@
 from config import config
 from style import style
 import os, base64
-from aosus_extracter import aosusExtracter
-from utils import (
-    getUserProfileImageUrlPath
-)
+
 
 class htmlBody:
-    def __init__(self, htmlTemplate:str, data:dict):
+    """
+    htmlBody: the object that responsible to deal with HTML 
+
+    args:
+        - data(dict): a value resulting from an extraction process (aosusExtracter) from an article page for aosus discourse
+
+    variables:
+        - ok(bool): if it is "True", this means that nothing is hindering the object's operation.
+        - tag(str): a value from `data` represents an article's tags
+        - tagsColor(str): a hexadecimal color value represents the article's first tag color.
+    """
+    def __init__(self, data:dict):
         self.ok   = True
-        self.htmlTemplate = htmlTemplate
         self.data = data
         self.tag = self.data.get('tag')
         
         if self.tag:
             color = self.tag.split(' | ')[0]
-            print(color)
             self.tagsColor = config.tagsColors.get(color, '#1d8337')
-            print(self.tagsColor)
         else:
             self.tagsColor = '#1d8337'
 
-        self.htmlTemplatePath = os.path.join('htmlTemplate', self.htmlTemplate)
-        if not os.path.exists(self.htmlTemplatePath):
-            self.ok = False
-            print(f"[htmlBody]: `{self.htmlTemplatePath}` is not exists!")
+        self.htmlTemplatePath = './htmlTemplate'
 
 
     def _setCard(self):
+        """
+        _setCard: a function responsible to creat a social preview card as HTML syntex
+        """
         cardHeader = f""" 
         <!-- الرأس: الشعار في اليمين -->
         <div class="card-header">
@@ -54,13 +59,13 @@ class htmlBody:
             <div class="footer-link"> aosus.org </div>
         </div>
         
-        <!-- صورة الزخرفة (توضع هنا كآخر عنصر) -->
+        <!-- صورة الزخرفة (غلى يمين الكرت) -->
         <img src="./images/x.png" class="decoration-image">
 
-        <!-- صورة الزخرفة (توضع هنا كآخر عنصر) -->
+        <!-- صورة الزخرفة (على يسار الكرت) -->
         <img src="./images/left-side.png" class="decoration-image-left">
 
-        <!-- صورة الزخرفة (توضع هنا كآخر عنصر) -->
+        <!-- صورة الزخرفة (العلوية) -->
         <img src="./images/top-side.png" class="decoration-image-top">
         """
 
@@ -68,8 +73,11 @@ class htmlBody:
         return cardBase
     
     def setHTML(self):
-        s = style(htmlTemplate=self.htmlTemplate)
-        htmlHead     = f"""<head>\n\t<meta charset="UTF-8">\n\t{s._setFontFace(withStyleTag=True)} \n\t<link rel="stylesheet" href="data:text/css;base64,{base64.b64encode(s.setCssFile(justGetStyle=True, badgesColor=self.tagsColor)).decode('utf-8')}"> \n</head>"""
+        """
+        setHTML: the function responsible to create HTML file/generate a social preview card ;)
+        """
+        s = style(_withStyleTag=True)
+        htmlHead     = f"""<head>\n\t<meta charset="UTF-8">\n\t{s.fontFace} \n\t<link rel="stylesheet" href="data:text/css;base64,{base64.b64encode(s.setCssSyntax(badgesColor=self.tagsColor)).decode('utf-8')}"> \n</head>"""
         htmlBody     = f"""<body>{self._setCard()}</body>"""
         htmlFullBody = f"""<!DOCTYPE html>\n<html lang="ar">\n{htmlHead}\n{htmlBody}</html>"""
 
@@ -83,11 +91,5 @@ class htmlBody:
                 print(f'[htmlBody.setHTML]: opss! can not write on `{htmlPath}`')
                 return False
             
-
-if __name__ == '__main__':
-    url = 'https://discourse.aosus.org/t/topic/3229'
-
-    print(htmlBody(htmlTemplate='aosusTest', data=aosusExtracter(url)._extractArtcleData()).setHTML())
-    
 
 
