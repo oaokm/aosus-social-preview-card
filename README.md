@@ -68,6 +68,11 @@ sudo chmod ugo+x ./aosusSocialCard/cli.py
 ```
 This modifies the file permissions of `cli.py`, granting execute rights to the **u**ser (owner), **g**roup, and **o**thers. This is a necessary final step so that the operating system can run the script directly when you call `aosusCard` from the command line.
 
+### Step 9: Install Playwright Browsers and Dependencies
+```bash
+playwright install
+```
+This command downloads and installs all required web browsers (Chromium, Firefox, and WebKit) along with their necessary system dependencies that Playwright relies on. This step is critical because the tool uses Playwright to render HTML templates and convert them into high-quality preview card images, ensuring accurate visual representation of the article metadata and design elements. Without executing this command, the generation process will fail since the environment will lack the rendering engine needed to properly convert HTML content into images.
 
 
 > **Final Note**  
