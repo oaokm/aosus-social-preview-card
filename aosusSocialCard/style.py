@@ -38,7 +38,7 @@ class style:
                 
                 white-space: nowrap;
                 border: 1px solid #374151;
-
+ 
                 direction: rtl;
                 """
 

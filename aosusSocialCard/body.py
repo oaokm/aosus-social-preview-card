@@ -12,6 +12,7 @@ class htmlBody:
         self.htmlTemplate = htmlTemplate
         self.data = data
         self.tag = self.data.get('tag')
+        
         if self.tag:
             color = self.tag.split(' | ')[0]
             print(color)
@@ -25,7 +26,7 @@ class htmlBody:
             self.ok = False
             print(f"[htmlBody]: `{self.htmlTemplatePath}` is not exists!")
 
-        
+
     def _setCard(self):
         cardHeader = f""" 
         <!-- الرأس: الشعار في اليمين -->
@@ -67,10 +68,8 @@ class htmlBody:
         return cardBase
     
     def setHTML(self):
-        # ./{os.path.join(self.htmlTemplatePath, 'style.css')}
         s = style(htmlTemplate=self.htmlTemplate)
         htmlHead     = f"""<head>\n\t<meta charset="UTF-8">\n\t{s._setFontFace(withStyleTag=True)} \n\t<link rel="stylesheet" href="data:text/css;base64,{base64.b64encode(s.setCssFile(justGetStyle=True, badgesColor=self.tagsColor)).decode('utf-8')}"> \n</head>"""
-        # htmlHead     = f"""<head> \n<style> \n{style(htmlTemplate=self.htmlTemplate).setCssFile(getStyle=True).read()} \n</style>\n</head>"""
         htmlBody     = f"""<body>{self._setCard()}</body>"""
         htmlFullBody = f"""<!DOCTYPE html>\n<html lang="ar">\n{htmlHead}\n{htmlBody}</html>"""
 
@@ -89,6 +88,6 @@ if __name__ == '__main__':
     url = 'https://discourse.aosus.org/t/topic/3229'
 
     print(htmlBody(htmlTemplate='aosusTest', data=aosusExtracter(url)._extractArtcleData()).setHTML())
-
+    
 
 

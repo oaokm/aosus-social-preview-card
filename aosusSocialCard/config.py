@@ -31,3 +31,7 @@ class config:
         'البرامج والأنظمه المغلقة': '#231f20',
         'GnuLinuxsa': '#25aae2',
     }
+
+    aosus_social_preview_card_dir_path = './aosus_social_preview_card'
+
+    tcpPort = 8000
