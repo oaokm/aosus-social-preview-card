@@ -96,6 +96,8 @@ It fetches the article from the provided URL, extracts basic article information
 ### 4. Output
 The generated card image is saved to `./aosusSocialCard/aosus_social_preview_card`.
 
+> **Note**:
+>  If you want to re-genarate social preview card, just add `-f` or `--forced_generate` to command.
 
 ## TCP/IP CLI Options
 

@@ -65,7 +65,7 @@ class style:
 
         args:
             - _withStyleTag(bool): if it `True`, return CSS syntax with <style>
-            - mainFont(str):
+            - c(str): fndicates the use of the main font in config file
         
         """
 
