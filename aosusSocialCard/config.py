@@ -1,15 +1,32 @@
+import os
+
 class config:
     baseCss = './htmlTemplate/baseStyle.css'
 
     fontsPath = './htmlTemplate/fonts'
     font_weights = {
-        "Alyamama-Black.ttf": 900,
-        "Alyamama-ExtraBold.ttf": 800,
-        "Alyamama-Bold.ttf": 700,
-        "Alyamama-SemiBold.ttf": 600,
-        "Alyamama-Regular.ttf": 400,
-        "Alyamama-Light.ttf": 300,
+        'Alyamama':{
+            "Alyamama-Black.ttf": 900,
+            "Alyamama-ExtraBold.ttf": 800,
+            "Alyamama-Bold.ttf": 700,
+            "Alyamama-SemiBold.ttf": 600,
+            "Alyamama-Regular.ttf": 400,
+            "Alyamama-Light.ttf": 300,
+        },
+        'aosus':{
+           "IBMPlexSansArabic-ExtraLight.ttf" : 150,
+           "IBMPlexSansArabic-Light.ttf" : 300,
+           "IBMPlexSansArabic-Regular.ttf" : 400,
+           "IBMPlexSansArabic-Thin.ttf" : 500,
+           "IBMPlexSansArabic-SemiBold.ttf" : 600,
+           "IBMPlexSansArabic-Bold.ttf" : 700
+        }
     }
+    fonts = {
+        'aosus': os.path.join(fontsPath, 'receiptNarrow.woff2'),
+        'Alyamama': os.path.join(fontsPath, 'Alyamama-Regular.ttf')
+    }
+    defualtFont = 'aosus'
 
     domainBase = 'discourse.aosus.org'
 

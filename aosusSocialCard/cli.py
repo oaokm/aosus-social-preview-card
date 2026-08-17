@@ -4,7 +4,8 @@ import os, subprocess
 COMMANDLINECURRENTPATH = os.getcwd()
 
 from utils import (
-    extractArticleID
+    extractArticleID,
+    _removeFile
 )
 
 from aosus_extracter import aosusExtracter
@@ -21,6 +22,7 @@ parser = argparse.ArgumentParser(description="", prog='Fasel-hd cli')
 generate = parser.add_argument_group('Generate Card Options')
 
 generate.add_argument('-gen', "--generate", help="generate social preview card", type=str, metavar='<AOSUS URL>')
+generate.add_argument('--forced_generate', "-f", help="re-generate social preview card", action='store_true', default=False)
 
 
 #* TCP/IP section
@@ -41,6 +43,8 @@ args = parser.parse_args()
 if args.generate:
     id = extractArticleID(args.generate)
     cardPath = os.path.join(config.aosus_social_preview_card_dir_path, id+'.png')
+    if args.forced_generate:
+        _removeFile(cardPath)
     if not os.path.exists(cardPath):
         htmlBody(data=aosusExtracter(args.generate)._extractArtcleData()).setHTML()
         try:

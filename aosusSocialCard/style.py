@@ -45,7 +45,6 @@ class style:
                 
                 font-size: 18px;
                 font-weight: 700;
-                font-family: 'Alyamama';
                 
                 white-space: nowrap;
                 border: 1px solid #374151;
@@ -60,16 +59,17 @@ class style:
             return baseCssData.encode('utf-8')
 
 
-    def _setFontFace(self, withStyleTag=False):
+    def _setFontFace(self, withStyleTag=False, mainFont=config.defualtFont):
         """
         _setFontFace: function that responsible to set font face css syntax
 
         args:
             - _withStyleTag(bool): if it `True`, return CSS syntax with <style>
-
+            - mainFont(str):
         
         """
-        for filename, weight in config.font_weights.items():
+
+        for filename, weight in config.font_weights.get(mainFont).items():
             file_path = os.path.join(config.fontsPath, filename)
             if not os.path.exists(file_path):
                 continue
@@ -81,14 +81,15 @@ class style:
             
             # إنشاء تعريف @font-face
             fontFace = f"""@font-face {{
-                    font-family: 'Alyamama';
+                    font-family: '{mainFont}';
                     src: url('data:{mime_type};charset=utf-8;base64,{b64_string}') format('truetype');
                     font-weight: {weight};
                     font-style: normal;
                     font-display: swap;
-                }}"""
+                }}\n* {{box-sizing: border-box; margin: 0; padding: 0; font-family: '{mainFont}';}}"""
+        
         if withStyleTag:
             return f"""<style>\n\t{fontFace}\n</style>"""
-        
+
         return fontFace
 
